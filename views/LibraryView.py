@@ -1,7 +1,10 @@
 
-from PyQt6.QtWidgets import QApplication, QHBoxLayout, QVBoxLayout, QWidget, QMainWindow, QFormLayout, QLineEdit, QPushButton, QSpinBox, QTableWidget, QBoxLayout, QHeaderView
+from PyQt6.QtWidgets import (QApplication, QHBoxLayout, QVBoxLayout, QWidget, QMainWindow, QFormLayout
+                            , QLineEdit, QPushButton, QSpinBox, QTableWidget, QBoxLayout, QHeaderView, QMenuBar, QMenu)
 from qt_material import apply_stylesheet
 from PyQt6.QtCore import Qt
+from PyQt6.QtGui import QAction
+from AppLication import app
 
 class MainForm(QMainWindow):
     def __init__(self):
@@ -10,6 +13,8 @@ class MainForm(QMainWindow):
         self.setWindowTitle("مدیریت کتابخانه")
         self.resize(1000, 500)
         self.setLayoutDirection(Qt.LayoutDirection.RightToLeft)
+
+        #self.Set_Menu_bar()
 
         self.MainWindow_Layout = QHBoxLayout()
         self.MainWindow_Layout.setStretch(0,1)
@@ -54,3 +59,18 @@ class MainForm(QMainWindow):
         self.Left_Layout.addWidget(self.txtSearch)
         self.Left_Layout.addWidget(self.Table)
 
+    # def Set_Menu_bar(self):
+
+    #     self.menu = self.menuBar()
+    #     self.menu_parent = self.menu.addMenu("قالب")
+    
+    #     for item in app.Theme_List:
+    #         action = QAction(item, self)
+    #         action.triggered.connect(lambda checked, param=item: self.menu12(param))
+
+    #         self.menu_parent.addAction(action)
+
+    #     #self.menu_parent.addMenu(self.Template_Menu)
+
+    # def menu12(self, item):
+    #     print(item)
