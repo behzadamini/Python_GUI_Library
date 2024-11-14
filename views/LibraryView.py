@@ -1,5 +1,5 @@
 
-from PyQt6.QtWidgets import (QApplication, QHBoxLayout, QVBoxLayout, QWidget, QMainWindow, QFormLayout
+from PyQt6.QtWidgets import (QApplication, QHBoxLayout, QVBoxLayout, QWidget, QMainWindow, QFormLayout, QAbstractItemView
                             , QLineEdit, QPushButton, QSpinBox, QTableWidget, QBoxLayout, QHeaderView, QMenuBar, QMenu)
 from qt_material import apply_stylesheet
 from PyQt6.QtCore import Qt
@@ -36,24 +36,28 @@ class MainForm(QMainWindow):
         self.txtBookYear.setRange(1300, 1500)
         self.txtBookIsbn = QLineEdit()
         self.btnSave = QPushButton("ثبت")
+        self.btnExcel = QPushButton("EXCEL")
 
         self.Right_Layout.addRow("نام کتاب", self.txtBookName)
         self.Right_Layout.addRow("نویسنده", self.txtBookAuthor)
         self.Right_Layout.addRow("سال چاپ", self.txtBookYear)
         self.Right_Layout.addRow("کد کتاب(isbn)", self.txtBookIsbn)
         self.Right_Layout.addRow("", self.btnSave)
+        self.Right_Layout.addRow("", self.btnExcel)
 
         self.txtSearch = QLineEdit()
         self.txtSearch.setMinimumWidth = 600
         self.txtSearch.setPlaceholderText("جستجو")
 
         self.Table = QTableWidget()
-        self.Table.setColumnCount(7)
+        self.Table.setColumnCount(8)
 
-        self.Table.setHorizontalHeaderLabels(["کد","نام کتاب","نویسنده","سال چاپ","کد کتاب","ویرایش","حذف"])
+        self.Table.setHorizontalHeaderLabels(["کد","نام کتاب","نویسنده","سال چاپ","کد کتاب","ویرایش","حذف","چاپ"])
+        self.Table.setSelectionBehavior(QAbstractItemView.SelectionBehavior.SelectRows)
 
         header = self.Table.horizontalHeader()
         header.setSectionResizeMode(QHeaderView.ResizeMode.Stretch)
+        
 
 
         self.Left_Layout.addWidget(self.txtSearch)

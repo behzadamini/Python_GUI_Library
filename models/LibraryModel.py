@@ -36,13 +36,26 @@ class Repository():
         return Obj.bk_id
     
     def delete(self, ID):
-        book = session.query(Library).filter(bk_id == ID).first()
+        book = session.query(Library).filter(Library.bk_id == ID).first()
         if book:
             session.delete(book)  # حذف رکورد
             session.commit()  # ثبت تغییرات
             return "deleted"
         
-    def update(self, ID, Table, Object):
+    def update(self, ID, Object):
+        book = session.query(Library).filter(Library.bk_id == ID).first()
+
+        if book:
+            # حفظ شناسه اصلی
+            original_id = book.bk_id
+
+            # انتقال مقادیر از Object به book
+            for key, value in vars(Object).items():
+                if key != '_sa_instance_state' and hasattr(book, key):  
+                    setattr(book, key, value)
+            
+            book.bk_id = original_id
+
         session.commit()
 
     def SelectAll(self, obj):
@@ -56,10 +69,9 @@ class Repository():
         ).all()
         return results
 
-# r = Repository()
-# lib = Library("کتاببب", "خودم", "1403", "31231231231")
-# r.add(lib)
-# print(lib.bk_id)
+# lib = Library("65655کتاببب", "خودم", "1403", "31231231231")
+# rr = r.add(lib)
+# print(rr)
 
 # r = Repository()
 # re = r.SelectAll(Library)
